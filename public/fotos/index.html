@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Favorita Kees Keyk - Cheesecake Noir & Rose</title>
+    
+    <!-- Cargar Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fuente Inter de Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Configuración personalizada -->
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                'primary-black': '#1a1a1a', /* Negro principal */
+                'accent-pink': '#E91E63', /* Rosa vibrante */
+                'light-pink': '#FFC0CB', /* Rosa claro */
+                'text-light': '#F8F8F8', /* Texto claro para fondos oscuros */
+                'text-dark': '#333333',  /* Texto oscuro para fondos claros */
+                'bg-dark-secondary': '#2c2c2c', /* Fondo oscuro secundario */
+                'bg-light-secondary': '#f2f2f2', /* Fondo claro secundario */
+            },
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                serif: ['Playfair Display', 'serif'], /* Para títulos destacados */
+            }
+        }
+    }
+}
+</script>
+
+<!-- Tus estilos CSS normales -->
+<style>
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Clases personalizadas, animaciones, etc. */
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.fade-in-element.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ...resto de tu CSS */
+</style>
+
+</head>
+<body class="bg-primary-black text-text-light">
+
+    <!-- ===== Encabezado y Navegación ===== --><header class="sticky top-0 z-50 w-full bg-primary-black/90 backdrop-blur-md shadow-lg">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo grande -->
+                <a href="logo_letra_LA_FAVORITA.png" class="shrink-0 flex items-center gap-2" title="La Favorita Kees Keyk">
+                    <img class="h-96 w-auto" src="logo_letra_LA_FAVORITA.png" alt="Logo La Favorita Kees Keyk">
+                </a>
+
+                
+                <!-- Navegación de Escritorio --><div class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="#sabores" class="text-text-light hover:text-accent-pink transition duration-300 font-medium">Nuestros Sabores</a>
+                    <a href="#historia" class="text-text-light hover:text-accent-pink transition duration-300 font-medium">Nuestra Historia</a>
+                    <a href="#galeria" class="text-text-light hover:text-accent-pink transition duration-300 font-medium">Galería</a>
+                    <a href="#contacto" class="text-text-light hover:text-accent-pink transition duration-300 font-medium">Contacto</a>
+                    <a href="#pedido" class="ml-4 px-6 py-2.5 text-lg font-semibold text-primary-black bg-accent-pink rounded-full shadow-lg hover:bg-light-pink hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                        Hacer Pedido
+                    </a>
+                </div>
+                
+                <!-- Botón de Menú Móvil --><div class="md:hidden flex items-center">
+                    <button id="menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-text-light hover:text-accent-pink hover:bg-bg-dark-secondary focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-accent-pink" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Abrir menú principal</span>
+                        <!-- Icono Hamburguesa --><svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- Icono 'X' (se muestra al abrir) --><svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Menú Móvil (se muestra al hacer clic) --><div class="md:hidden hidden bg-primary-black" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#sabores" class="text-text-light hover:bg-bg-dark-secondary hover:text-accent-pink block px-3 py-2 rounded-md text-base font-medium">Nuestros Sabores</a>
+                <a href="#historia" class="text-text-light hover:bg-bg-dark-secondary hover:text-accent-pink block px-3 py-2 rounded-md text-base font-medium">Nuestra Historia</a>
+                <a href="#galeria" class="text-text-light hover:bg-bg-dark-secondary hover:text-accent-pink block px-3 py-2 rounded-md text-base font-medium">Galería</a>
+                <a href="#contacto" class="text-text-light hover:bg-bg-dark-secondary hover:text-accent-pink block px-3 py-2 rounded-md text-base font-medium">Contacto</a>
+            </div>
+            <a href="#pedido" class="block w-11/12 mx-auto my-4 px-6 py-3 text-center text-primary-black font-semibold bg-accent-pink rounded-full shadow-md hover:bg-light-pink">
+                Hacer Pedido
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== Sección Hero ===== --><main>
+        <section class="relative min-h-screen flex items-center justify-center pt-20">
+            <!-- Imagen de fondo --><div class="absolute inset-0 z-0">
+                <img src="hero.jpg" 
+                     alt="Delicioso cheesecake con topings rosados" 
+                     class="w-full h-full object-cover opacity-20"
+                     onerror="this.src='https://placehold.co/1920x1080/222222/E91E63?text=Cheesecake+Exclusivo'">
+                <!-- Superposición oscura para legibilidad (ya integrado en la opacidad) --></div>
+            
+            <!-- Contenido del Hero --><div class="relative z-10 text-center px-4 fade-in-element is-visible">
+                <h1 class="font-serif text-5xl sm:text-6xl md:text-8xl font-extrabold text-text-light tracking-tight drop-shadow-lg leading-tight">
+                    <span class="block">La Pasión por</span>
+                    <span class="block text-accent-pink mt-2">el Cheesecake Perfecto</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-light-pink leading-relaxed drop-shadow-md">
+                    Descubre una experiencia de sabor y lujo. Cheesecakes artesanales, hechos con elegancia y pasión en cada capa.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#sabores" class="w-full sm:w-auto px-9 py-4 text-lg font-bold text-primary-black bg-accent-pink rounded-full shadow-xl hover:bg-light-pink transform hover:scale-105 transition duration-300 ease-in-out">
+                        Ver Nuestros Sabores
+                    </a>
+                    <a href="#historia" class="w-full sm:w-auto px-9 py-4 text-lg font-bold text-text-light bg-transparent border-2 border-text-light rounded-full hover:bg-text-light hover:text-primary-black transition duration-300">
+                        Nuestra Historia
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sección de Productos (Nuestros Sabores) ===== --><section id="sabores" class="py-20 lg:py-28 bg-bg-dark-secondary">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto fade-in-element">
+                    <h2 class="text-base font-semibold text-accent-pink tracking-wide uppercase">Exquisitez Artesanal</h2>
+                    <p class="mt-2 font-serif text-4xl lg:text-5xl font-extrabold text-text-light tracking-tight">Nuestra Colección Favorita</p>
+                    <p class="mt-6 text-lg text-gray-400">
+                        Cada cheesecake es una creación única, elaborada con los ingredientes más finos y una dedicación inigualable.
+                    </p>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                    
+                    <!-- Tarjeta de Producto 1 --><div class="bg-primary-black rounded-xl shadow-lg overflow-hidden transform transition duration-500 hover:shadow-2xl hover:-translate-y-2 border border-bg-dark-secondary fade-in-element">
+                        <img class="w-full h-64 object-cover" 
+                             src="https://placehold.co/600x400/333333/E91E63?text=Fresa+Imperial" 
+                             alt="Cheesecake Fresa Imperial"
+                             onerror="this.src='https://placehold.co/600x400/333333/E91E63?text=Fresa+Imperial'">
+                        <div class="p-6">
+                            <h3 class="font-serif text-2xl font-bold text-text-light">La Clásica</h3>
+                            <p class="mt-2 text-gray-400">Fresa fresca y una base de galleta con un toque de vainilla. Un lujo en cada rebanada.</p>
+                            <div class="mt-5 flex justify-between items-center">
+                                <span class="text-2xl font-extrabold text-accent-pink">$1.50</span>
+                                <a href="#" class="px-6 py-2.5 text-sm font-semibold text-primary-black bg-accent-pink rounded-full hover:bg-light-pink transition duration-300">Añadir al Carrito</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Producto 2 --><div class="bg-primary-black rounded-xl shadow-lg overflow-hidden transform transition duration-500 hover:shadow-2xl hover:-translate-y-2 border border-bg-dark-secondary fade-in-element" style="transition-delay: 150ms;">
+                        <img class="w-full h-64 object-cover" 
+                             src="https://placehold.co/600x400/333333/FFFFFF?text=Velvet+Negro" 
+                             alt="Cheesecake Velvet Negro"
+                             onerror="this.src='https://placehold.co/600x400/333333/FFFFFF?text=Velvet+Negro'">
+                        <div class="p-6">
+                            <h3 class="font-serif text-2xl font-bold text-text-light">Velvet Negro</h3>
+                            <p class="mt-2 text-gray-400">Profundo cacao belga y un toque de crema agria, para una experiencia inigualable.</p>
+                            <div class="mt-5 flex justify-between items-center">
+                                <span class="text-2xl font-extrabold text-accent-pink">$42.00</span>
+                                <a href="#" class="px-6 py-2.5 text-sm font-semibold text-primary-black bg-accent-pink rounded-full hover:bg-light-pink transition duration-300">Añadir al Carrito</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Producto 3 --><div class="bg-primary-black rounded-xl shadow-lg overflow-hidden transform transition duration-500 hover:shadow-2xl hover:-translate-y-2 border border-bg-dark-secondary fade-in-element" style="transition-delay: 300ms;">
+                        <img class="w-full h-64 object-cover" 
+                             src="https://placehold.co/600x400/333333/E91E63?text=Pistacho+Rosa" 
+                             alt="Cheesecake Pistacho Rosa"
+                             onerror="this.src='https://placehold.co/600x400/333333/E91E63?text=Pistacho+Rosa'">
+                        <div class="p-6">
+                            <h3 class="font-serif text-2xl font-bold text-text-light">Pistacho Rosa</h3>
+                            <p class="mt-2 text-gray-400">La delicadeza del pistacho con un sutil toque de agua de rosas. Una sinfonía de sabores.</p>
+                            <div class="mt-5 flex justify-between items-center">
+                                <span class="text-2xl font-extrabold text-accent-pink">$41.00</span>
+                                <a href="#" class="px-6 py-2.5 text-sm font-semibold text-primary-black bg-accent-pink rounded-full hover:bg-light-pink transition duration-300">Añadir al Carrito</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sección "Nuestra Historia" ===== --><section id="historia" class="py-20 lg:py-28 bg-primary-black">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                    
+                    <!-- Columna de Imagen --><div class="w-full lg:w-1/2 fade-in-element">
+                        <img src="https://placehold.co/600x700/1a1a1a/E91E63?text=Maestría+Artesanal" 
+                             alt="Pastelera decorando un cheesecake con precisión" 
+                             class="rounded-xl shadow-2xl object-cover w-full h-[500px] lg:h-[700px] border border-accent-pink"
+                             onerror="this.src='https://placehold.co/600x700/1a1a1a/E91E63?text=Maestría+Artesanal'">
+                    </div>
+                    
+                    <!-- Columna de Texto --><div class="w-full lg:w-1/2 fade-in-element" style="transition-delay: 150ms;">
+                        <h2 class="text-base font-semibold text-accent-pink tracking-wide uppercase">Nuestra Legado</h2>
+                        <p class="mt-2 font-serif text-4xl lg:text-5xl font-extrabold text-text-light tracking-tight">Donde la Pasión se Hornea</p>
+                        <p class="mt-6 text-lg text-gray-400 leading-relaxed">
+                            "La Favorita Kees Keyk" surgió de un amor inquebrantable por la repostería y la búsqueda de la perfección en cada cheesecake. Lo que empezó como un pequeño sueño, hoy es un arte que compartimos con el mundo.
+                        </p>
+                        <p class="mt-4 text-lg text-gray-400 leading-relaxed">
+                            Seleccionamos minuciosamente cada ingrediente: quesos crema premium, frutas de temporada y esencias naturales. Cada cheesecake es batido, horneado y decorado a mano, garantizando una calidad y un sabor que no tienen rival.
+                        </p>
+                        <p class="mt-4 text-lg text-gray-400 leading-relaxed">
+                            Más allá de un postre, ofrecemos una experiencia. Un momento de indulgencia pura, una celebración del buen gusto. Únete a la tradición de "La Favorita".
+                        </p>
+                        <a href="#pedido" class="mt-10 inline-block px-9 py-4 text-lg font-bold text-primary-black bg-accent-pink rounded-full shadow-xl hover:bg-light-pink transform hover:scale-105 transition duration-300 ease-in-out">
+                            Explora Nuestro Menú
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Sección de Testimonios (Slider) ===== --><section class="py-20 lg:py-28 bg-bg-dark-secondary text-text-light">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto fade-in-element">
+                    <h2 class="font-serif text-4xl lg:text-5xl font-extrabold tracking-tight">Opiniones de Nuestra Distinguida Clientela</h2>
+                    <p class="mt-6 text-lg text-gray-400">
+                        La voz de quienes nos eligen, nuestro mayor orgullo y motivación.
+                    </p>
+                </div>
+
+                <!-- Contenedor del Slider --><div class="mt-16 relative max-w-3xl mx-auto overflow-hidden">
+                    <div class="slider-wrapper flex">
+                        
+                        <!-- Testimonio 1 --><div class="slider-item w-full shrink-0">
+                            <div class="bg-primary-black p-8 rounded-xl shadow-lg text-center border border-bg-dark-secondary">
+                                <!-- Icono de comillas --><svg class="w-12 h-12 mx-auto text-accent-pink" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                    <path d="M9.333 22.583c0-2.75 1.083-5.083 3.25-7 2.167-1.917 4.583-2.875 7.25-2.875.417 0 .833.042 1.25.125v-5c-2.083-.417-4.167-.625-6.25-.625-5.417 0-9.792 1.833-13.125 5.5-3.333 3.667-5 8.333-5 14v5.375h11.667v-9.5zM22.667 22.583c0-2.75 1.083-5.083 3.25-7 2.167-1.917 4.583-2.875 7.25-2.875.417 0 .833.042 1.25.125v-5c-2.083-.417-4.167-.625-6.25-.625-5.417 0-9.792 1.833-13.125 5.5-3.333 3.667-5 8.333-5 14v5.375h11.667v-9.5z"></path>
+                                </svg>
+                                <blockquote class="mt-6">
+                                    <p class="text-xl font-medium text-text-light">
+                                        "Una experiencia sublime. El cheesecake Velvet Negro es una delicia que no se puede describir. Elegancia y sabor en cada bocado."
+                                    </p>
+                                </blockquote>
+                                <footer class="mt-6">
+                                    <div class="font-semibold text-light-pink">Isabella Rossi</div>
+                                    <div class="text-gray-500">Crítica Gastronómica</div>
+                                </footer>
+                            </div>
+                        </div>
+
+                        <!-- Testimonio 2 --><div class="slider-item w-full shrink-0">
+                            <div class="bg-primary-black p-8 rounded-xl shadow-lg text-center border border-bg-dark-secondary">
+                                <svg class="w-12 h-12 mx-auto text-accent-pink" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                    <path d="M9.333 22.583c0-2.75 1.083-5.083 3.25-7 2.167-1.917 4.583-2.875 7.25-2.875.417 0 .833.042 1.25.125v-5c-2.083-.417-4.167-.625-6.25-.625-5.417 0-9.792 1.833-13.125 5.5-3.333 3.667-5 8.333-5 14v5.375h11.667v-9.5zM22.667 22.583c0-2.75 1.083-5.083 3.25-7 2.167-1.917 4.583-2.875 7.25-2.875.417 0 .833.042 1.25.125v-5c-2.083-.417-4.167-.625-6.25-.625-5.417 0-9.792 1.833-13.125 5.5-3.333 3.667-5 8.333-5 14v5.375h11.667v-9.5z"></path>
+                                </svg>
+                                <blockquote class="mt-6">
+                                    <p class="text-xl font-medium text-text-light">
+                                        "La presentación es impecable y el sabor del Pistacho Rosa me ha dejado sin palabras. ¡Un regalo perfecto para cualquier ocasión especial!"
+                                    </p>
+                                </blockquote>
+                                <footer class="mt-6">
+                                    <div class="font-semibold text-light-pink">Alejandro Fuentes</div>
+                                    <div class="text-gray-500">Empresario</div>
+                                </footer>
+                            </div>
+                        </div>
+
+                        <!-- Testimonio 3 --><div class="slider-item w-full shrink-0">
+                            <div class="bg-primary-black p-8 rounded-xl shadow-lg text-center border border-bg-dark-secondary">
+                                <svg class="w-12 h-12 mx-auto text-accent-pink" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                    <path d="M9.333 22.583c0-2.75 1.083-5.083 3.25-7 2.167-1.917 4.583-2.875 7.25-2.875.417 0 .833.042 1.25.125v-5c-2.083-.417-4.167-.625-6.25-.625-5.417 0-9.792 1.833-13.125 5.5-3.333 3.667-5 8.333-5 14v5.375h11.667v-9.5zM22.667 22.583c0-2.75 1.083-5.083 3.25-7 2.167-1.917 4.583-2.875 7.25-2.875.417 0 .833.042 1.25.125v-5c-2.083-.417-4.167-.625-6.25-.625-5.417 0-9.792 1.833-13.125 5.5-3.333 3.667-5 8.333-5 14v5.375h11.667v-9.5z"></path>
+                                </svg>
+                                <blockquote class="mt-6">
+                                    <p class="text-xl font-medium text-text-light">
+                                        "Cada vez que necesito un toque dulce y elegante, La Favorita es mi primera opción. El de Fresa Imperial es mi favorito, ¡nunca falla!"
+                                    </p>
+                                </blockquote>
+                                <footer class="mt-6">
+                                    <div class="font-semibold text-light-pink">Sofía Navarro</div>
+                                    <div class="text-gray-500">Organizadora de Eventos</div>
+                                </footer>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Controles del Slider --><button id="prev-testimonial" class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-12 p-3 bg-bg-dark-secondary rounded-full text-text-light hover:bg-accent-pink transition duration-300 focus:outline-hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-testimonial" class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-12 p-3 bg-bg-dark-secondary rounded-full text-text-light hover:bg-accent-pink transition duration-300 focus:outline-hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== Sección Galería (con Modal) ===== --><section id="galeria" class="py-20 lg:py-28 bg-primary-black">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto fade-in-element">
+                    <h2 class="text-base font-semibold text-accent-pink tracking-wide uppercase">El Arte del Placer</h2>
+                    <p class="mt-2 font-serif text-4xl lg:text-5xl font-extrabold text-text-light tracking-tight">Nuestra Galería Visual</p>
+                    <p class="mt-6 text-lg text-gray-400">
+                        Cada imagen captura la esencia de nuestra pasión y la belleza de nuestras creaciones.
+                    </p>
+                </div>
+
+                <!-- Grid de la Galería --><div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="fade-in-element">
+                        <img src="https://placehold.co/600x600/333333/E91E63?text=Cheesecake+Fresa" alt="Cheesecake de fresa con decoración de lujo" class="gallery-item w-full h-full object-cover rounded-lg shadow-md cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl border border-bg-dark-secondary">
+                    </div>
+                    <div class="fade-in-element" style="transition-delay: 100ms;">
+                        <img src="https://placehold.co/600x600/333333/FFFFFF?text=Cheesecake+Velvet" alt="Cheesecake terciopelo oscuro" class="gallery-item w-full h-full object-cover rounded-lg shadow-md cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl border border-bg-dark-secondary">
+                    </div>
+                    <div class="fade-in-element" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x600/333333/E91E63?text=Pistacho+Rosa" alt="Cheesecake de pistacho y rosas" class="gallery-item w-full h-full object-cover rounded-lg shadow-md cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl border border-bg-dark-secondary">
+                    </div>
+                    <div class="fade-in-element" style="transition-delay: 300ms;">
+                        <img src="https://placehold.co/600x600/333333/FFFFFF?text=Rebanada+Perfecta" alt="Rebanada de cheesecake servida elegantemente" class="gallery-item w-full h-full object-cover rounded-lg shadow-md cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl border border-bg-dark-secondary">
+                    </div>
+                    <div class="fade-in-element col-span-2">
+                        <img src="https://placehold.co/1200x600/333333/E91E63?text=Mesa+de+Postres" alt="Mesa de postres con varios cheesecakes" class="gallery-item w-full h-full object-cover rounded-lg shadow-md cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl border border-bg-dark-secondary">
+                    </div>
+                    <div class="fade-in-element" style="transition-delay: 100ms;">
+                        <img src="https://placehold.co/600x600/333333/FFFFFF?text=Detalle+Cercano" alt="Detalle de la textura cremosa del cheesecake" class="gallery-item w-full h-full object-cover rounded-lg shadow-md cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl border border-bg-dark-secondary">
+                    </div>
+                     <div class="fade-in-element" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x600/333333/E91E63?text=Decoración+Floral" alt="Cheesecake decorado con flores comestibles" class="gallery-item w-full h-full object-cover rounded-lg shadow-md cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl border border-bg-dark-secondary">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Modal de la Galería (Oculto por defecto) ===== --><div id="gallery-modal" class="fixed inset-0 z-100 bg-primary-black/90 backdrop-blur-xs flex items-center justify-center p-4 hidden transition-opacity duration-300">
+            <div class="relative max-w-4xl max-h-[90vh] bg-primary-black rounded-lg shadow-2xl overflow-hidden border border-accent-pink">
+                <img id="modal-image" src="" alt="Vista ampliada de la galería" class="object-contain max-w-full max-h-[90vh]">
+                <button id="modal-close" class="absolute top-3 right-3 p-2 bg-primary-black/70 rounded-full text-text-light hover:bg-accent-pink focus:outline-hidden transition duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== Sección de Pedido (CTA Final) ===== --><section id="pedido" class="py-20 lg:py-32 bg-accent-pink">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-element">
+                <h2 class="font-serif text-4xl lg:text-5xl font-extrabold text-primary-black tracking-tight drop-shadow-md">
+                    Tu Momento de Indulgencia te Espera
+                </h2>
+                <p class="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-primary-black leading-relaxed drop-shadow-xs">
+                    Ordena tu cheesecake favorito en línea para recoger en tienda o para envío a domicilio. Descubre la diferencia de "La Favorita".
+                </p>
+                <a href="#" class="mt-10 inline-block px-10 py-5 text-xl font-bold text-accent-pink bg-primary-black rounded-full shadow-2xl hover:bg-bg-dark-secondary transform hover:scale-105 transition duration-300 ease-in-out">
+                    Hacer Pedido Ahora
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== --><footer id="contacto" class="bg-primary-black text-gray-400">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                
+                <!-- Columna 1: Logo y Acerca de --><div class="md:col-span-1">
+                    <a href="#" class="flex items-center gap-2" title="La Favorita Kees Keyk">
+                        <img class="h-10 w-auto" src="image_50fb5a.png" alt="Logo La Favorita Kees Keyk">
+                        <span class="font-serif text-xl font-bold text-text-light">
+                            La Favorita
+                        </span>
+                    </a>
+                    <p class="mt-4 text-sm">
+                        Creando obras maestras de cheesecake, con pasión y precisión, desde 2023.
+                    </p>
+                </div>
+
+                <!-- Columna 2: Enlaces Rápidos --><div>
+                    <h3 class="text-sm font-semibold text-text-light tracking-wider uppercase">Explorar</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><a href="#sabores" class="hover:text-accent-pink transition duration-300">Nuestros Sabores</a></li>
+                        <li><a href="#historia" class="hover:text-accent-pink transition duration-300">Nuestra Historia</a></li>
+                        <li><a href="#galeria" class="hover:text-accent-pink transition duration-300">Galería</a></li>
+                        <li><a href="#" class="hover:text-accent-pink transition duration-300">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Contacto --><div>
+                    <h3 class="text-sm font-semibold text-text-light tracking-wider uppercase">Contacto</h3>
+                    <ul class="mt-4 space-y-3">
+                        <li><p>Calle Secreta 456, Ciudad del Cheesecake</p></li>
+                        <li><a href="mailto:info@lafavorita.com" class="hover:text-accent-pink transition duration-300">info@lafavorita.com</a></li>
+                        <li><a href="tel:+34919876543" class="hover:text-accent-pink transition duration-300">+34 919 876 543</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Redes Sociales --><div>
+                    <h3 class="text-sm font-semibold text-text-light tracking-wider uppercase">Síguenos</h3>
+                    <p class="mt-4 text-sm">No te pierdas nuestras últimas creaciones y promociones exclusivas.</p>
+                    <div class="mt-4 flex space-x-5">
+                        <a href="#" class="text-gray-400 hover:text-accent-pink transition duration-300">
+                            <span class="sr-only">Instagram</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2.828c.162 0 .323.002.484.008.16.006.32.016.478.026.16.01.318.023.475.04.158.016.315.035.47.058.156.023.31.05.462.078.154.028.306.06.456.094.15.034.3.072.447.114.146.04.29.086.432.134.142.05.282.1.42.152.138.05.274.1.408.156.136.056.27.112.4.17.13.058.257.117.38.178.124.06.245.124.363.186.118.062.234.126.346.19.114.064.225.13.332.2.108.07.213.14.314.212.1.074.198.147.292.22.094.074.186.15.274.228.088.078.174.156.256.236.082.08.16.16.236.242.076.082.15.162.222.246.072.084.14.168.206.254.066.086.13.172.19.26.06.09.116.18.17.27.054.09.104.18.15.274.046.092.09.184.13.276.04.09.077.18.11.27.034.09.065.18.094.27.028.09.053.18.075.27.022.09.04.18.056.27.016.09.028.18.04.27.01.09.02.18.025.27.006.09.008.18.01.27.002.09.003.18.003.27s0 .18-.003.27c-.002.09-.004.18-.01.27-.005.09-.015.18-.025.27-.012.09-.024.18-.04.27-.016.09-.034.18-.056.27-.023.09-.046.18-.075.27-.03.09-.06.18-.094.27-.033.09-.07.18-.11.27-.04.092-.084.184-.13.276-.046.09-.1.18-.15.274-.054.09-.11.18-.17.27-.06.09-.12.18-.19.26-.066.088-.136.174-.206.254-.072.084-.15.168-.222.246-.076.082-.15.162-.236.242-.082.08-.168.16-.256.236-.088.078-.18.156-.274.228-.094.074-.19.15-.292.22-.104.073-.208.142-.314.212-.108.07-.22.138-.332.2-.112.064-.228.128-.346.19-.118.062-.24.126-.363.186-.122.06-.246.12-.38.178-.13.058-.26.116-.4.17-.134.056-.27.112-.408.156-.138.052-.28.1-.42.152-.142.05-.286.098-.432.134-.146.04-.29.078-.447.114-.15.034-.302.066-.456.094-.152.028-.304.056-.462.078-.155.023-.312.04-.47.058-.158.016-.316.03-.475.04-.158.01-.32.02-.478.026-.16-.006-.322-.008-.484-.008-.162 0-.323-.002-.484-.008-.16-.006-.32-.016-.478-.026-.16-.01-.318-.023-.475-.04-.158-.016-.315-.035-.47-.058-.156-.023-.31-.05-.462-.078-.154-.028-.306-.06-.456-.094-.15-.034-.3-.072-.447-.114-.146-.04-.29-.086-.432-.134-.142-.05-.282-.1-.42-.152-.138-.05-.274-.1-.408-.156-.136-.056-.27-.112-.4-.17-.13-.058-.257-.117-.38-.178-.124-.06-.245-.124-.363-.186-.118-.062-.234-.126-.346-.19-.114-.064-.225-.13-.332-.2-.108-.07-.213-.14-.314-.212-.1-.074-.198-.147-.292-.22-.094-.074-.186-.15-.274-.228-.088-.078-.174-.156-.256-.236-.082-.08-.16-.16-.236-.242-.076-.082-.15-.162-.222-.246-.072-.084-.14-.168-.206-.254-.066-.086-.13-.172-.19-.26-.06-.09-.116-.18-.17-.27-.054-.09-.104-.18-.15-.274-.046-.092-.09-.184-.13-.276-.04-.09-.077-.18-.11-.27-.034-.09-.065-.18-.094-.27-.028-.09-.053-.18-.075-.27-.022-.09-.04-.18-.056-.27-.016-.09-.028-.18-.04-.27-.01-.09-.02-.18-.025-.27-.006-.09-.008-.18-.01-.27-.002-.09-.003-.18-.003-.27s0-.18.003-.27c.002-.09.004-.18.01-.27.005-.09.015-.18.025-.27.012-.09.024-.18.04-.27.016-.09.034-.18.056-.27.023.09.046.18.075.27.03.09.06.18.094.27.033.09.07.18.11.27.04.092.084.184.13.276.046.09.1-.18.15-.274.054-.09.11-.18.17-.27.06-.09.12-.18.19-.26.066-.088.136-.174.206-.254.072-.084.15-.168.222-.246.076-.082.15-.162.236-.242.082-.08.168-.16.256-.236.088-.078.18-.156.274-.228.094-.074.19-.15.292-.22.104-.073.208-.142.314-.212.108-.07.22-.138.332-.2.112-.064.228-.128.346-.19.118-.062.24-.126.363-.186.122-.06.246-.12.38-.178.13-.058.26-.116.4-.17.134-.056.27-.112.408-.156.138-.052.28-.1.42-.152.142-.05.286-.098.432-.134.146-.04.29-.078.447-.114.15-.034.302-.066.456-.094.c.152-.028.304-.056.462-.078.155-.023.312-.04.47-.058.158-.016.316-.03.475-.04.158-.01.32-.02.478-.026.16-.006.322-.008.484-.008zm-4.664 6.11c-1.39 0-2.77.2-4.08.59-.13.04-.26.08-.39.12-.13.04-.26.09-.39.14-.13.05-.25.1-.38.15-.13.05-.25.1-.38.16-.12.05-.24.1-.36.16-.12.05-.24.1-.35.16-.12.05-.23.1-.34.16-.11.05-.22.1-.33.16-.11.05-.21.1-.31.15-.1.05-.2.1-.3.15-.1.05-.19.1-.28.15-.09.05-.18.1-.27.14-.09.05-.18.1-.26.14-.08.05-.16.1-.24.14-.08.04-.16.09-.24.13-.08.04-.15.09-.23.13-.07.04-.14.08-.21.12-.07.04-.14.08-.2.12-.07.04-.13.08-.19.12-.06.04-.12.08-.18.11-.06.04-.12.07-.17.11-.06.03-.11.07-.16.1-.05.03-.1.06-.15.1-.05.03-.1.06-.14.09-.04.03-.09.06-.13.09-.04.03-.08.06-.12.08-.04.03-.08.06-.12.08-.04.02-.08.05-.11.07-.04.02-.07.05-.1.07-.03.02-.06.04-.09.06-.03.02-.06.04-.09.06-.03.02-.06.04-.08.05-.03.02-.06.03-.08.05-.03.02-.05.03-.08.05-.02.01-.05.03-.07.04-.02.01-.05.03-.07.04-.02.01-.04.03-.06.04-.02.01-.04.02-.06.04-.02.01-.04.02-.05.03-.02.01-.03.02-.05.03-.01.01-.03.02-.04.03-.01.01-.03.02-.04.03-.01.01-.02.02-.04.02-.01.01-.02.02-.03.03-.01.01-.02.02-.03.02-.01.01-.02.01-.03.02-.01.01-.02.01-.03.02-.01.01-.01.01-.02.02-.01.01-.01.01-.02.02-.01.01-.01.01-.02.02-.01.01-.01.01-.01.02-.01.01-.01.01-.01.02-.01.01-.01.01-.01.02l-.01.02c0 .01 0 .01-.01.02 0 .01 0 .01-.01.02 0 .01 0 .01-.01.02 0 .01 0 .01-.01.02 0 .01-.01.02-.01.03 0 .01 0 .02-.01.03s0 .02-.01.03 0 .02-.01.03 0 .02-.01.03 0 .02-.01.03c0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03s0 .02-.01.03c0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .01 0 .02-.01.03 0 .15.016.3.03.45.04.15.01.3.02.45.03.15.01.3.02.45.02.15.01.3.02.45.02.15 0 .3.02.45.02.15 0 .3.01.45.02.15 0 .3.01.44.02.15 0 .3.01.44.01.15 0 .3.01.44.01.14 0 .29.01.43.01.14 0 .29.01.43.01.14 0 .28.01.42.01.14 0 .28.01.42.01.14 0 .28.01.42.01.14 0 .28 0 .42.01.14 0 .28 0 .41.01.14 0 .27 0 .41.01.14 0 .27 0 .4.01.13 0 .27 0 .4.01.13 0 .26 0 .39.01.13 0 .26 0 .39.01.13 0 .25 0 .38.01.13 0 .25 0 .37.01.12 0 .24 0 .36.01.12 0 .24 0 .35.01.11 0 .23 0 .34.01.11 0 .22 0 .33.01.11 0 .21 0 .31.01.1 0 .2 0 .3.01.1 0 .19.01.28.01.09 0 .18.01.27.01.09 0 .18.01.26.01.09 0 .17.01.25.01.08 0 .16.01.24.01.08 0 .16.01.24.01.08 0 .15.01.23.01.08 0 .15.01.22.01.07 0 .14.01.21.01.07 0 .14.01.2.01.07 0 .13.01.19.01.06 0 .12.01.18.01.06 0 .12.01.17.01.06 0 .11.01.16.01.05 0 .1.01.15.01.05 0 .1.01.14.01.05 0 .09.01.13.01.04 0 .09.01.13.01.04 0 .08.01.12.01.04 0 .08.01.12.01.04 0 .08.01.11.01.04 0 .07.01.1.01.03 0 .07.01.1.01.03 0 .06.01.09.01.03 0 .06.01.09.01.03 0 .06.01.08.01.03 0 .05.01.08.01.02 0 .05.01.07.01.02 0 .05.01.07.01.02 0 .04.01.06.01.02 0 .04.01.06.01.02 0 .04.01.05.01.02 0 .03.01.05.01.01 0 .03.01.04.01.01 0 .03.01.04.01.01 0 .02.01.03.01.01 0 .02.01.03.01.01 0 .02.01.03.01.01 0 .02.01.02.01.01 0 .01.01.02.01.01 0 .01.01.02.01.01 0 .01.01.02.01.01 0 .01.01.01.01.01 0 .01.01.01.01v-3.79c-1.32-.42-2.58-.9-3.78-1.44-1.2-.54-2.3-1.14-3.3-1.8-1-.66-1.9-1.38-2.7-2.16-.8-.78-1.5-1.6-2.1-2.46-.6-.86-1.1-1.74-1.5-2.64-.4-.9-.6-1.8-.6-2.7s.2-1.8.6-2.7c.4-.9.9-1.78 1.5-2.64.6-.86 1.3-1.68 2.1-2.46.8-.78 1.7-1.5 2.7-2.16 1-.66 2.1-1.26 3.3-1.8 1.2-.54 2.46-1.02 3.78-1.44v-3.79c-.01 0-.01-.01-.02-.01-.01 0-.01-.01-.02-.01-.01 0-.01-.01-.02-.01-.01 0-.01-.01-.02-.01-.01 0-.02-.01-.03-.01-.01 0-.02-.01-.03-.02-.01 0-.02-.01-.03-.02-.01 0-.02-.01-.03-.02-.01 0-.02-.01-.04-.02-.01 0-.02-.01-.04-.02-.01 0-.03-.01-.04-.03-.01 0-.03-.01-.04-.03-.01 0-.03-.01-.05-.03-.02 0-.03-.02-.05-.03-.02 0-.04-.02-.06-.04-.02 0-.04-.02-.06-.04-.02 0-.05-.02-.07-.04-.02 0-.05-.03-.07-.04-.03 0-.06-.03-.08-.05-.03 0-.06-.03-.08-.05-.03 0-.06-.03-.09-.06-.03 0-.06-.04-.09-.06-.03 0-.07-.04-.1-.07-.03 0-.07-.04-.11-.07-.04 0-.08-.05-.12-.08-.04 0-.08-.05-.12-.08-.04 0-.09-.06-.13-.09-.04 0-.09-.06-.14-.09-.05 0-.1-.06-.15-.1-.05 0-.11-.07-.16-.1-.06 0-.12-.07-.17-.11-.06 0-.12-.08-.18-.11-.06 0-.13-.08-.19-.12-.07 0-.14-.08-.2-.12-.07 0-.14-.08-.21-.12-.07 0-.15-.09-.23-.13-.08 0-.16-.09-.24-.13-.08 0-.16-.1-.24-.14-.08 0-.17-.1-.26-.14-.09 0-.18-.1-.27-.14-.09 0-.19-.1-.28-.15-.1 0-.2-.1-.3-.15-.1 0-.21-.1-.31-.15-.11 0-.22-.1-.33-.16-.11 0-.23-.1-.34-.16-.11 0-.23-.1-.35-.16-.12 0-.24-.1-.36-.16-.13 0-.25-.1-.38-.16-.13 0-.25-.1-.38-.15-.13 0-.26-.09-.39-.14-.13 0-.26-.08-.39-.12-1.3-.4-2.69-.6-4.08-.6-3.18 0-6.13.9-8.8 2.5-2.67 1.6-4.8 3.7-6.3 6.3-1.5 2.6-2.2 5.5-2.2 8.7s.7 6.1 2.2 8.7c1.5 2.6 3.6 4.7 6.3 6.3 2.67 1.6 5.62 2.5 8.8 2.5zM12 8c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm0 6c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" clip-rule="evenodd"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent-pink transition duration-300">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent-pink transition duration-300">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.27 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.48.75 2.79 1.9 3.55-.7-.02-1.37-.21-1.95-.5v.03c0 2.07 1.47 3.8 3.42 4.19-.36.1-.74.15-1.14.15-.27 0-.54-.03-.8-.08.54 1.7 2.1 2.93 3.96 2.96-1.46 1.14-3.3 1.82-5.3 1.82-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21c7.34 0 11.35-6.08 11.35-11.35 0-.17 0-.34-.01-.5 0 0 .01-.01.01-.01.78-.57 1.45-1.28 1.99-2.08z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright --><div class="mt-12 border-t border-bg-dark-secondary pt-8 text-center">
+                <p class="text-sm">&copy; <span id="current-year"></span> La Favorita Kees Keyk. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ===== Manejador del Menú Móvil =====
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = menuButton.querySelector('svg:first-child');
+            const closeIcon = menuButton.querySelector('svg:last-child');
+
+            menuButton.addEventListener('click', () => {
+                const expanded = menuButton.getAttribute('aria-expanded') === 'true' || false;
+                menuButton.setAttribute('aria-expanded', !expanded);
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
+
+            // Cerrar menú móvil al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
+
+
+            // ===== Animación de Aparición al Desplazar (Scroll-reveal) =====
+            const fadeInElements = document.querySelectorAll('.fade-in-element');
+
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.1 // 10% del elemento visible
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Dejar de observar una vez animado
+                    }
+                });
+            };
+
+            const intersectionObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+            fadeInElements.forEach(el => {
+                // Si ya está en pantalla al cargar (e.g., hero section)
+                if (el.getBoundingClientRect().top < window.innerHeight && el.getBoundingClientRect().bottom > 0) {
+                    el.classList.add('is-visible');
+                } else {
+                    intersectionObserver.observe(el);
+                }
+            });
+
+
+            // ===== Slider de Testimonios =====
+            const sliderWrapper = document.querySelector('.slider-wrapper');
+            const sliderItems = document.querySelectorAll('.slider-item');
+            const prevButton = document.getElementById('prev-testimonial');
+            const nextButton = document.getElementById('next-testimonial');
+            let currentIndex = 0;
+            const totalItems = sliderItems.length;
+
+            function updateSliderPosition() {
+                sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateSliderPosition();
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateSliderPosition();
+            });
+
+            // Auto-play (opcional)
+            // setInterval(() => {
+            //     nextButton.click();
+            // }, 5000);
+
+
+            // ===== Modal de la Galería =====
+            const galleryImages = document.querySelectorAll('.gallery-item');
+            const modal = document.getElementById('gallery-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeModalButton = document.getElementById('modal-close');
+
+            galleryImages.forEach(image => {
+                image.addEventListener('click', () => {
+                    modalImage.src = image.src;
+                    modalImage.alt = image.alt;
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
+                });
+            });
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restaurar scroll
+            }
+
+            closeModalButton.addEventListener('click', closeModal);
+            
+            // Cerrar al hacer clic fuera de la imagen
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Cerrar con la tecla Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+
+            // ===== Actualizar año del Copyright =====
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        });
+    </script>
+
+</body>
+</html>
+

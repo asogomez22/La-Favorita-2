@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --color-brand-green: #b2c9ae;
+  --color-brand-pink: #ff69b4;
+  --color-brand-dark: #1c1c1c;
+  --color-brand-cream: #f9f9f9;
+
+  --font-sans:
+    Poppins, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif:
+    Montserrat, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility lenis {
+  /* Configuración Lenis */
+  &html {
+    height: auto;
+  }
+  &.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  &.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  &.lenis-stopped {
+    overflow: hidden;
+  }
+  &.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+}
+
+@utility lenis-smooth {
+  &.lenis {
+    scroll-behavior: auto;
+  }
+  &.lenis [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+}
+
+@utility lenis-stopped {
+  &.lenis {
+    overflow: hidden;
+  }
+}
+
+@utility lenis-scrolling {
+  &.lenis iframe {
+    pointer-events: none;
+  }
+}
+
+@utility fade-in-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility is-visible {
+  &.fade-in-element {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+    body {
+        @apply bg-brand-cream text-brand-dark;
+        background-color: #F9F9F9; /* Fallback */
+        color: #1C1C1C;
+    }
+    
+    [x-cloak] { 
+        display: none !important; 
+    }
+}
+
+/* Hover solo en desktop */
+@media (hover: hover) {
+    .desktop-hover-trigger:hover .desktop-hover-target {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
