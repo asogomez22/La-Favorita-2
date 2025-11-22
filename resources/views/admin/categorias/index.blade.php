@@ -1,86 +1,77 @@
-<x-app-layout  title="Categorías">
-    <x-slot name="header">
-        <h2 class="font-bold text-2xl text-[#2c2c2c] leading-tight" style="font-family: 'Poppins', sans-serif;">
-            {{ __('Gestión de Categories') }}
-        </h2>
-    </x-slot>
+<x-admin-layout title="Gestión de Categorías">
+    
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+        <div>
+            <h2 class="text-3xl font-bold text-[#2c2c2c]" style="font-family: 'Poppins', sans-serif;">Categorías</h2>
+            <p class="text-gray-500 mt-1">Organiza tus productos en categorías</p>
+        </div>
+        <a href="{{ route('admin.categorias.create') }}" 
+           class="flex items-center px-6 py-3 bg-[#FF40A8] text-white rounded-xl shadow-lg shadow-pink-500/30 hover:bg-[#f32ba0] hover:shadow-pink-500/40 transition-all duration-300 transform hover:-translate-y-1 font-bold">
+            <i class="fas fa-plus mr-2"></i>
+            Nueva Categoría
+        </a>
+    </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 sm:px-20 bg-white border-b border-gray-200" style="font-family: 'Poppins', sans-serif;">
-                    
-                    {{-- Botón Añadir --}}
-                    <div class="mb-6 text-right">
-                        <a href="{{ route('admin.categorias.create') }}" 
-                           class="inline-flex items-center px-6 py-3 bg-[#FF40A8] text-white text-base font-semibold rounded-lg shadow-md hover:bg-[#FB80B1] transition duration-300 focus:outline-hidden focus:ring-2 focus:ring-[#FF40A8] focus:ring-offset-2">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                            Añadir Nueva Categoria
-                        </a>
-                    </div>
-                    
-                    {{-- Mensajes de Sesión (Eliminado el @include) --}}
-                    {{-- Si quieres mostrar mensajes aquí, tendrías que añadir el código --}}
-                     @if (session('success'))
-                         <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-sm relative" role="alert">
-                             <span class="block sm:inline">{{ session('success') }}</span>
-                         </div>
-                     @endif
-                     @if (session('error'))
-                         <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-sm relative" role="alert">
-                             <span class="block sm:inline">{{ session('error') }}</span>
-                         </div>
-                     @endif
+    <!-- Table Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full whitespace-nowrap">
+                <thead>
+                    <tr class="bg-gray-50/50 border-b border-gray-100 text-left">
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Nombre</th>
+                        <th class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    @forelse ($categorias as $categoria)
+                        <tr class="hover:bg-gray-50/50 transition-colors duration-200">
+                            
+                            <!-- Name -->
+                            <td class="px-6 py-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="shrink-0 w-10 h-10 rounded-full bg-[#a3b48c]/10 flex items-center justify-center text-[#a3b48c]">
+                                        <i class="fas fa-tag"></i>
+                                    </div>
+                                    <span class="text-sm font-bold text-gray-900">{{ $categoria->nombre }}</span>
+                                </div>
+                            </td>
 
-
-                    @if ($categorias->isEmpty())
-                        <p class="text-center text-gray-500 text-lg py-10">Aún no hay categorias creadas.</p>
-                    @else
-                        {{-- Tabla de categorías --}}
-                        <div class="overflow-x-auto border border-gray-200 rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                            Nombre
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                            Acciones
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-100">
-                                    {{-- Bucle CORRECTO sobre $categorias --}}
-                                    @foreach ($categorias as $categoria)
-                                        <tr class="hover:bg-gray-50 transition duration-150">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $categoria->nombre }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-4">
-                                                {{-- Botón Editar --}}
-                                                <a href="{{ route('admin.categorias.edit', $categoria) }}" 
-                                                   class="text-[#FF40A8] hover:text-[#FB80A1] font-semibold transition duration-150">
-                                                    Editar
-                                                </a>
-                                                {{-- Formulario Borrar --}}
-                                                <form action="{{ route('admin.categorias.destroy', $categoria) }}" method="POST" class="inline-block" 
-                                                      onsubmit="return confirm('ATENCIÓ: Vols eliminar la categoria \'{{ $categoria->nombre }}\'? Si té productes associats, no es podrà eliminar.');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-800 font-semibold transition duration-150">
-                                                        Borrar
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
-                </div>
-            </div>
+                            <!-- Actions -->
+                            <td class="px-6 py-4 text-right">
+                                <div class="flex items-center justify-end space-x-3">
+                                    <a href="{{ route('admin.categorias.edit', $categoria) }}" 
+                                       class="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors" title="Editar">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    
+                                    <form action="{{ route('admin.categorias.destroy', $categoria) }}" method="POST" 
+                                          onsubmit="return confirm('ATENCIÓ: Vols eliminar la categoria \'{{ $categoria->nombre }}\'? Si té productes associats, no es podrà eliminar.');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors" title="Eliminar">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="2" class="px-6 py-12 text-center text-gray-500">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                                        <i class="fas fa-tags text-3xl text-gray-400"></i>
+                                    </div>
+                                    <p class="text-lg font-medium">No hay categorías todavía</p>
+                                    <p class="text-sm mt-1">Crea tu primera categoría para organizar tus productos.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>
 

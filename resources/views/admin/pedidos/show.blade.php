@@ -1,4 +1,4 @@
-<x-app-layout title="Detalle Pedido">
+<x-admin-layout title="Detalle Pedido">
     <x-slot name="header">
         <div class="flex items-center justify-between py-4 bg-white border-b border-gray-200">
             <h1 class="text-2xl font-bold text-gray-900 tracking-tight" style="font-family: 'Inter', sans-serif;">
@@ -170,4 +170,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

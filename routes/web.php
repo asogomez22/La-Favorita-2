@@ -51,14 +51,6 @@ Route::prefix('cart')->name('cart.')->group(function () {
 // ----------------------------------------------------------------------
 // DASHBOARD (Usuario autenticado)
 // ----------------------------------------------------------------------
-Route::get('/dashboard', function () {
-    $productCount = Producto::count();
-    $categoryCount = Categoria::count();
-    $orderCount = Pedido::count();
-
-    return view('dashboard', compact('productCount', 'categoryCount', 'orderCount'));
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // ----------------------------------------------------------------------
 // PERFIL DE USUARIO
 // ----------------------------------------------------------------------
@@ -72,6 +64,15 @@ Route::middleware('auth')->group(function () {
 // PANEL DE ADMINISTRACIÓN (Solo admin)
 // ----------------------------------------------------------------------
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+
+    // Dashboard
+    Route::get('/dashboard', function () {
+        $productCount = Producto::count();
+        $categoryCount = Categoria::count();
+        $orderCount = Pedido::count();
+    
+        return view('admin.dashboard', compact('productCount', 'categoryCount', 'orderCount'));
+    })->name('dashboard');
 
     // Recursos CRUD
     Route::resource('productos', ProductoController::class);
