@@ -27,31 +27,44 @@ class CartController extends Controller
     /**
      * Añade un producto al carrito.
      */
-public function add(Request $request, Producto $producto)
-{
-    if (!$producto->activo) {
-        return back()->with('error', 'Aquest producte no està disponible.');
+    public function add(Request $request, Producto $producto)
+    {
+        if (!$producto->activo) {
+            if ($request->wantsJson()) {
+                return response()->json(['error' => 'Aquest producte no està disponible.'], 422);
+            }
+            return back()->with('error', 'Aquest producte no està disponible.');
+        }
+
+        $cantidad = (int) $request->input('cantidad', 1);
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$producto->id])) {
+            $cart[$producto->id]['cantidad'] += $cantidad;
+        } else {
+            $cart[$producto->id] = [
+                'nombre' => $producto->nombre,
+                'precio' => $producto->precio,
+                'cantidad' => $cantidad,
+                'imagen' => $producto->imagen
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        // Calculate total items count
+        $cartCount = array_sum(array_column($cart, 'cantidad'));
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => 'Producto añadido al carrito.',
+                'cartCount' => $cartCount
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Producto añadido al carrito.');
     }
-
-    $cantidad = (int) $request->input('cantidad', 1); // <- Aquí usamos lo enviado desde el formulario
-
-    $cart = session()->get('cart', []);
-
-    if (isset($cart[$producto->id])) {
-        $cart[$producto->id]['cantidad'] += $cantidad; // Sumar la cantidad enviada
-    } else {
-        $cart[$producto->id] = [
-            'nombre' => $producto->nombre,
-            'precio' => $producto->precio,
-            'cantidad' => $cantidad,
-            'imagen' => $producto->imagen
-        ];
-    }
-
-    session()->put('cart', $cart);
-
-    return redirect()->back()->with('success', 'Producto añadido al carrito.');
-}
 
 
     /**
@@ -71,6 +84,19 @@ public function add(Request $request, Producto $producto)
             }
             session()->put('cart', $cart);
         }
+
+        if ($request->wantsJson()) {
+            // Recalculate totals
+            $total = array_sum(array_map(fn($item) => ($item['precio'] ?? 0) * ($item['cantidad'] ?? 0), $cart));
+            $cartCount = array_sum(array_column($cart, 'cantidad'));
+            
+            return response()->json([
+                'success' => 'Carrito actualizado.',
+                'total' => number_format($total, 2, ',', '.'),
+                'cartCount' => $cartCount
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Carrito actualizado.');
     }
 

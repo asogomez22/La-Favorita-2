@@ -29,7 +29,7 @@
             
             <div class="flex items-center gap-4 md:gap-12">
                 <a href="{{ route('public.inicio') }}" class="shrink-0 flex items-center gap-2">
-                    <img class="w-auto object-contain transition-all duration-300" 
+                    <img class="w-auto object-contain transition-all duration-300 max-w-[180px] md:max-w-none" 
                            :class="{ 'h-10 md:h-14': isScrolled, 'h-12 md:h-20': !isScrolled }"
                            src="{{ asset('fotos/logo_letra_LA_FAVORITA.png') }}" 
                            alt="Logo"
@@ -48,9 +48,11 @@
                     <svg class="w-5 h-5 md:w-6 md:h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.658-.463 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                     </svg>
-                    @php $cartCount = session('cart') ? count(session('cart')) : 0; @endphp
+                    @php $cartCount = session('cart') ? array_sum(array_column(session('cart'), 'cantidad')) : 0; @endphp
+
                     @if($cartCount > 0)
-                        <span class="absolute -top-2 -right-2 flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full bg-brand-pink text-white text-[10px] md:text-xs font-bold border-2 border-brand-dark">{{ $cartCount }}</span>
+                        <span id="cart-count" class="absolute -top-2 -right-2 flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full bg-brand-pink text-white text-[10px] md:text-xs font-bold border-2 border-brand-dark">{{ $cartCount }}</span>
+
                     @endif
                 </a>
 
@@ -68,7 +70,7 @@
         </div>
     </nav>
 
-    <div class="md:hidden hidden bg-brand-cream border-t-2 border-brand-dark fixed w-full z-40 shadow-2xl" id="mobile-menu">
+    <div class="md:hidden hidden bg-brand-cream border-t-2 border-brand-dark absolute top-full left-0 w-full z-40 shadow-2xl" id="mobile-menu">
         <div class="flex flex-col p-4 space-y-2">
             <a href="{{ route('public.menu') }}" class="px-4 py-3 text-lg font-bold text-brand-dark bg-brand-green/10 hover:bg-brand-pink hover:text-white rounded-xl transition-colors">Nuestro Menú</a>
             <a href="{{ route('public.inicio') }}#historia" class="px-4 py-3 text-lg font-bold text-brand-dark bg-white hover:bg-brand-pink hover:text-white rounded-xl transition-colors border-2 border-transparent hover:border-brand-dark">Historia</a>
@@ -188,6 +190,73 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in-element').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in-element').forEach(el => observer.observe(el));
+
+    async function addToCart(event, url) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                
+                // Update cart count
+                const cartCountEl = document.getElementById('cart-count');
+                if (cartCountEl) {
+                    cartCountEl.textContent = data.cartCount;
+                    cartCountEl.style.display = 'flex';
+                } else {
+                    // Create badge if it doesn't exist
+                    const cartLink = document.querySelector('a[href*="cart"]');
+                    if(cartLink) {
+                         const span = document.createElement('span');
+                         span.id = 'cart-count';
+                         span.className = 'absolute -top-2 -right-2 flex h-5 w-5 md:h-6 md:w-6 items-center justify-center rounded-full bg-brand-pink text-white text-[10px] md:text-xs font-bold border-2 border-brand-dark';
+                         span.textContent = data.cartCount;
+                         cartLink.appendChild(span);
+                    }
+                }
+
+                // Show toast
+                window.dispatchEvent(new CustomEvent('show-toast', { detail: data.success }));
+            } else {
+                console.error('Error adding to cart');
+                window.dispatchEvent(new CustomEvent('show-toast', { detail: 'Error al añadir al carrito' }));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 </script>
+
+<!-- Toast Component -->
+<div x-data="{ show: false, message: '' }"
+     x-on:show-toast.window="show = true; message = $event.detail; setTimeout(() => show = false, 3000)"
+     x-show="show"
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="opacity-0 transform translate-y-2"
+     x-transition:enter-end="opacity-100 transform translate-y-0"
+     x-transition:leave="transition ease-in duration-200"
+     x-transition:leave-start="opacity-100 transform translate-y-0"
+     x-transition:leave-end="opacity-0 transform translate-y-2"
+     class="fixed bottom-4 right-4 z-50 bg-brand-dark text-white px-6 py-3 rounded-lg shadow-lg border-2 border-brand-pink flex items-center gap-3"
+     style="display: none;">
+    <svg class="w-6 h-6 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span x-text="message" class="font-bold"></span>
+</div>
+
 </body>
 </html>

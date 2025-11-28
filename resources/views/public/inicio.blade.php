@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('content')
-    <section class="relative min-h-[85vh] flex items-center justify-center bg-brand-cream overflow-hidden">
+    <section class="relative min-h-[85vh] flex items-center justify-center bg-brand-cream overflow-hidden pt-12 pb-12 ">
         <div class="absolute top-0 right-0 w-full h-full bg-brand-green opacity-20 rounded-bl-[40%] -z-10 translate-x-1/4 -translate-y-1/4"></div>
 
         <div class="container mx-auto px-6 md:px-12 lg:px-24 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             
-            <div class="relative fade-in-element order-1 lg:order-2">
+            <div class="relative fade-in-element order-1 lg:order-2 lg:pr-24">
                 <div class="absolute inset-0 bg-brand-pink rounded-full blur-3xl opacity-20 animate-pulse"></div>
                 <img src="{{ asset('fotos/inicio.jpg') }}" 
                      alt="Cheesecake Hero" 
@@ -54,9 +54,11 @@
                     </p>
                     <div class="flex flex-col xs:flex-row justify-center lg:justify-start gap-4">
                         <a href="{{ route('producto.detalle', $novedad) }}" class="px-8 py-3 bg-white text-brand-dark font-bold rounded-lg border-2 border-brand-dark hover:bg-brand-pink hover:text-white transition-colors text-center">Ver Detalle</a>
-                        <form action="{{ route('cart.add', $novedad) }}" method="POST">
+                        <form action="{{ route('cart.add', $novedad) }}" method="POST" onsubmit="addToCart(event, this.action)">
+
                             @csrf
-                            <button type="submit" class="w-full xs:w-auto px-8 py-3 bg-brand-dark text-white font-bold rounded-lg border-2 border-brand-dark hover:bg-gray-800 transition-colors">
+                            <button type="submit" class="w-full xs:w-auto px-8 py-3 bg-brand-dark text-white font-bold rounded-lg border-2 border-brand-dark hover:bg-gray-800 transition-colors cursor-pointer">
+
                                 Añadir
                             </button>
                         </form>
@@ -110,9 +112,11 @@
                                 {{ $producto->descripcion }}
                             </p>
                             <div class="mt-auto pt-1">
-                                <form action="{{ route('cart.add', $producto) }}" method="POST" class="w-full">
+                                <form action="{{ route('cart.add', $producto) }}" method="POST" class="w-full" onsubmit="addToCart(event, this.action)">
+
                                     @csrf
-                                    <button type="submit" class="w-full flex items-center justify-center gap-1 md:gap-2 py-2 md:py-3 px-2 rounded-lg font-bold border border-brand-dark transition-all duration-300 bg-brand-dark text-white text-xs md:text-sm hover:bg-brand-pink lg:bg-white lg:text-brand-dark lg:group-hover:bg-brand-dark lg:group-hover:text-white">
+                                    <button type="submit" class="w-full flex items-center justify-center gap-1 md:gap-2 py-2 md:py-3 px-2 rounded-lg font-bold border border-brand-dark transition-all duration-300 bg-brand-dark text-white text-xs md:text-sm hover:bg-brand-pink lg:bg-white lg:text-brand-dark lg:group-hover:bg-brand-dark lg:group-hover:text-white cursor-pointer">
+
                                         <span>Añadir</span>
                                         <svg class="hidden md:block w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                                     </button>
